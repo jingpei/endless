@@ -3,14 +3,22 @@ chrome.runtime.onInstalled.addListener(function () {
 })
 
 chrome.tabs.onActivated.addListener(function (activeInfo) {
-  chrome.tabs.get(activeInfo.tabId, function (tab) {
-    if(tab.url.match('youtube\.com\/*')) {
-      chrome.tabs.insertCSS(activeInfo.tabId, {
-        file: '../css/styles.css'
-      });
-      chrome.tabs.executeScript(activeInfo.tabId, {
-        file: './content.js'
-      });
-    }
-  })
+  chrome.tabs.get(activeInfo.tabId, runContent)
 })
+
+chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
+  if(changeInfo.url) {
+    runContent(tab)
+  }
+})
+
+function runContent (tab) {
+  if(tab.url.match('youtube\.com\/*')) {
+    chrome.tabs.insertCSS(tab.tabId, {
+      file: './css/styles.css'
+    });
+    chrome.tabs.executeScript(tab.tabId, {
+      file: './js/content.js'
+    });
+  }
+}
