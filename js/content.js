@@ -1,7 +1,9 @@
+console.log('contentjs is running from the top')
 var btnId = 'endless--repeat'
 var ytCtrl = document.getElementsByClassName('ytp-right-controls')[0]
 
 chrome.storage.sync.get('endlessRepeatEnabled', function(data) {
+  console.log('in storage.sync.get')
   var isEnabled = data['endlessRepeatEnabled']
   if(isEnabled) {
     appendRepeatControls()
@@ -19,8 +21,8 @@ chrome.storage.onChanged.addListener(function (changes, areaName) {
 function appendRepeatControls () {
   var btn, btnImg
   
-  // if the control isn't already there
-  if(!document.getElementById(btnId)) {
+  // if the control isn't already there and youtube player is present
+  if(!document.getElementById(btnId) && ytCtrl) {
     btn = document.createElement('button')
     btn.className = 'ytp-button'
     btn.id = btnId
