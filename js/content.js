@@ -1,9 +1,7 @@
-console.log('contentjs is running from the top')
 var btnId = 'endless--repeat'
 var ytCtrl = document.getElementsByClassName('ytp-right-controls')[0]
 
 chrome.storage.sync.get('endlessRepeatEnabled', function(data) {
-  console.log('in storage.sync.get')
   var isEnabled = data['endlessRepeatEnabled']
   if(isEnabled) {
     appendRepeatControls()
@@ -29,12 +27,14 @@ function appendRepeatControls () {
     btnImg = document.createElement('span')
     btn.appendChild(btnImg)
     ytCtrl.appendChild(btn)
-    toggleLoop(true)
     // add listeners for that control
     btn.addEventListener('click', function () {
       toggleLoop()
     })
   }
+
+  // make sure loop attribute is set
+  toggleLoop(true)
 }
 
 function removeRepeatControls () {
