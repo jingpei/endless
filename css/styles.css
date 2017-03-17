@@ -1,0 +1,17 @@
+#endless--repeat span {
+  display: block;
+  background: no-repeat url(//s.ytimg.com/yts/imgbin/www-hitchhiker-2x-vflU2Lece.webp) -341px -32px;
+  background-size: 455px 407px;
+  width: 24px;
+  height: 24px;  
+  opacity: 0.5;
+}
+
+#endless--repeat.e-repeat span {
+  opacity: 0.9;
+}
+
+#endless--repeat span:hover {
+  opacity: 1;
+  cursor: pointer;
+}
